@@ -27,3 +27,5 @@ The Windows script installs the native 1Password CLI too. Ubuntu prefers `op.exe
 Google is opened before the first GitHub browser sign-in. Each service controls its own sign-in buttons: select **Continue with Google** where offered, use existing subscribed accounts, and never create a replacement account. Paid Claude/Codex account information is checked when exposed by their tools. Credentials go only to the configured 1Password vault or private local authentication files.
 
 The installer follows Node LTS. A blocked vendor capability or unavailable vault item produces a clear error and resume command; no failing check is bypassed.
+
+On a new laptop, the installer first restores captured GitHub credentials from the shared vault before cloning the private toolkit. Valid captured logins avoid another browser sign-in.

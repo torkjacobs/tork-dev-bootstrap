@@ -90,6 +90,15 @@ engines() {
   fi
 }
 toolkit() {
+  # Restore captured GitHub access before cloning the private toolkit on a new laptop.
+  if ! gh auth status >/dev/null 2>&1; then
+    local github_item
+    github_item=$(op item list --vault 'Tork – Dev (Zunaid)' --format json | jq -r '[.[] | select(.title == "tork-login/github")][0].id // empty')
+    if [ -n "$github_item" ] && op read "op://Tork – Dev (Zunaid)/$github_item/credential" | gh auth login --with-token >/dev/null 2>&1; then
+      export TORK_GOOGLE_CONFIRMED=1
+      printf 'Captured GitHub login restored.\n'
+    fi
+  fi
   if ! gh auth status >/dev/null 2>&1; then
     printf 'Sign in to Google once, then choose Continue with Google where offered. Never create a new account.\n'
     if command -v wslview >/dev/null; then wslview https://accounts.google.com
